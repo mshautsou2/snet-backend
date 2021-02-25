@@ -8,11 +8,12 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = app.get<ConfigService>(ConfigService);
+
   if (config.get('NODE_ENV') === 'development') {
     const document = SwaggerModule.createDocument(
       app,
       new DocumentBuilder()
-        .setTitle('Item API')
+        .setTitle('Ietm API')
         .setDescription('My Item API')
         .build(),
     );

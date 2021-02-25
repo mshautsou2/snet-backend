@@ -3,10 +3,13 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { UserController } from './user/user.controller';
 import databaseConfig from './config/database.config';
-import { Permission } from './permission/permission.entity';
-import { PermissionModule } from './permission/permission.module';
+import { Permission } from './roles-and-permissions/entities/permission.entity';
+import { RolesAndPermissionsModule } from './roles-and-permissions/roles-and-permissions.module';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
+import { UsersController } from './users/users.controller';
+import { PermissionsGuard } from './roles-and-permissions/guards/permissions.guard';
 
 @Module({
   imports: [
@@ -15,9 +18,11 @@ import { PermissionModule } from './permission/permission.module';
     }),
     TypeOrmModule.forRoot(databaseConfig()),
     TypeOrmModule.forFeature([Permission]),
-    PermissionModule,
+    RolesAndPermissionsModule,
+    AuthModule,
+    UsersModule,
   ],
-  controllers: [AppController, UserController],
-  providers: [AppService],
+  controllers: [AppController, UsersController],
+  providers: [AppService, { provide: 'APP_GUARD', useClass: PermissionsGuard }],
 })
 export class AppModule {}

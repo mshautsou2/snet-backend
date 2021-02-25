@@ -7,11 +7,11 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { CreatePermissionDTO } from 'src/permission/dto/create-permission.dto';
-import { DeleteOneParams } from './dto/delete-one.dto';
-import { FindOneParams } from './dto/find-one.dto copy';
-import { UpdatePermissionDTO } from './dto/update-permission.dto';
-import { PermissionService } from './permission.service';
+import { CreatePermissionDTO } from 'src/roles-and-permissions/dto/create-permission.dto';
+import { DeleteOneParams } from '../dto/delete-one.dto';
+import { FindOneParams } from '../dto/find-one.dto copy';
+import { UpdatePermissionDTO } from '../dto/update-permission.dto';
+import { PermissionService } from '../services/permission.service';
 
 @Controller('permissions')
 export class PermissionController {
